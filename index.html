@@ -8,10 +8,39 @@
     <title>Library</title>
   </head>
   <body>
-    <main>
+    <header>
       <h1>A Simple Library</h1>
-      <button>New Book</button>
+    </header>
+    <main>
+      <button class="newBook">New Book</button>
       <div class="container"></div>
+      <div class="modal" id="forumModal">
+        <div class="modalContent">
+          <span class="close">&times;</span>
+          <form action="">
+            <div>
+              <label for="titleInput">Book Title</label>
+              <input type="text" id="titleInput" />
+            </div>
+            <div>
+              <label for="authorInput">Book Author</label>
+              <input type="text" id="authorInput" />
+            </div>
+            <div>
+              <label for="pagesInput">Number of Pages</label>
+              <input type="number" id="pagesInput" />
+            </div>
+            <div>
+              <label for="readInput">Have you read this book?</label>
+              <select name="readInput" id="readInput">
+                <option value="yes">yes</option>
+                <option value="no">no</option>
+              </select>
+            </div>
+            <button class="submit">Submit</button>
+          </form>
+        </div>
+      </div>
     </main>
     <script src="app.js"></script>
   </body>
