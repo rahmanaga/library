@@ -1,11 +1,35 @@
 const container = document.querySelector(".container");
-let myLibrary = [];
+const newBookBtn = document.querySelector(".newBook");
+const submitBtn = document.querySelector(".submit");
+const modal = document.querySelector('#forumModal');
+const authorInput = document.querySelector('#authorInput');
+const titleInput = document.querySelector('#titleInput');
+const pagesInput = document.querySelector('#pagesInput');
+const readInput = document.querySelector('#readInput');
+const close = document.querySelector(".close");
+const myLibrary = [];
 
-function Book(author, title, pages, read = false) {
-  this.author = author;
-  this.title = title;
-  this.pages = pages;
-  this.read = read;
+class Book {
+  constructor(author, title, pages, read = false) {
+    this.author = author;
+    this.title = title;
+    this.pages = pages;
+    this.read = read;
+  }
+}
+
+function toggleModal() {
+  modal.style.display = modal.style.display === "block" ? "none" : "block";
+}
+
+function closeModal() {
+  modal.style.display = "none";
+}
+
+function handleOutsideClick(event) {
+  if (event.target === modal) {
+    closeModal();
+  }
 }
 
 function addBookToLibrary(book) {
@@ -14,16 +38,13 @@ function addBookToLibrary(book) {
 
 function displayBook(book) {
   const newDiv = document.createElement("div");
-  const bookTitle = document.createElement("h2");
-  bookTitle.textContent = book.title;
-  const bookAuthor = document.createElement("p");
-  bookAuthor.textContent = `By: ${book.author}`;
-  const bookPages = document.createElement("p");
-  bookPages.textContent = `Pages: ${book.pages}`;
-  const bookRead = document.createElement("p");
-  bookRead.textContent = `Read: ${book.read ? "yes" : "no"}`;
-  newDiv.append(bookTitle, bookAuthor, bookPages, bookRead);
-  container.append(newDiv);
+  newDiv.innerHTML = `
+    <h2>${book.title}</h2>
+    <p>By: ${book.author}</p>
+    <p>Pages: ${book.pages}</p>
+    <p>Read: ${book.read ? "yes" : "no"}</p>
+  `;
+  container.appendChild(newDiv);
 }
 
 function displayBooks(library) {
@@ -32,4 +53,20 @@ function displayBooks(library) {
   });
 }
 
-displayBooks(myLibrary);
+function handleSubmit(event) {
+  event.preventDefault();
+  const newBook = new Book(
+    authorInput.value,
+    titleInput.value,
+    pagesInput.value,
+    readInput.value
+  );
+  addBookToLibrary(newBook);
+  closeModal();
+  displayBooks(myLibrary);
+}
+
+newBookBtn.addEventListener("click", toggleModal);
+close.addEventListener("click", closeModal);
+window.addEventListener("click", handleOutsideClick);
+submitBtn.addEventListener("click", handleSubmit);
