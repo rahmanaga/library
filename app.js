@@ -48,6 +48,7 @@ function displayBook(book) {
 }
 
 function displayBooks(library) {
+  container.innerHTML= ""
   library.forEach((book) => {
     displayBook(book);
   });
@@ -61,6 +62,9 @@ function handleSubmit(event) {
     pagesInput.value,
     readInput.value
   );
+  authorInput.value = "";
+  titleInput.value = "";
+  pagesInput.value = "";
   addBookToLibrary(newBook);
   closeModal();
   displayBooks(myLibrary);
