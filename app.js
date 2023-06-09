@@ -8,12 +8,14 @@ const pagesInput = document.querySelector('#pagesInput');
 const readInput = document.querySelector('#readInput');
 const close = document.querySelector(".close");
 const myLibrary = [];
+let bookCounter = 0;
 
 class Book {
-  constructor(author, title, pages, read = false) {
+  constructor(author, title, pages,id, read = false) {
     this.author = author;
     this.title = title;
     this.pages = pages;
+    this.id = id;
     this.read = read;
   }
 }
@@ -43,8 +45,11 @@ function displayBook(book) {
     <p>By: ${book.author}</p>
     <p>Pages: ${book.pages}</p>
     <p>Read: ${book.read ? "yes" : "no"}</p>
+    <button type="button" class="removeBtn" data-book-id="${book.id}">Remove</button>
   `;
   container.appendChild(newDiv);
+  const removeBtn = newDiv.querySelector(".removeBtn");
+  removeBtn.addEventListener("click", handleRemove);
 }
 
 function displayBooks(library) {
@@ -60,14 +65,25 @@ function handleSubmit(event) {
     authorInput.value,
     titleInput.value,
     pagesInput.value,
+    bookCounter,
     readInput.value
   );
   authorInput.value = "";
   titleInput.value = "";
   pagesInput.value = "";
+  bookCounter+=1
   addBookToLibrary(newBook);
   closeModal();
   displayBooks(myLibrary);
+}
+
+function handleRemove(event) {
+  const bookId = event.target.getAttribute("data-book-id");
+  const removeBtn = event.target;
+  const bookElement = removeBtn.parentElement;
+  const bookIndex = myLibrary.findIndex((book) => book.id === bookId)
+  myLibrary.splice(bookIndex,1)
+  bookElement.remove()
 }
 
 newBookBtn.addEventListener("click", toggleModal);
