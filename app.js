@@ -7,15 +7,51 @@ const titleInput = document.querySelector('#titleInput');
 const pagesInput = document.querySelector('#pagesInput');
 const readInput = document.querySelector('#readInput');
 const close = document.querySelector(".close");
-const myLibrary = [];
-let bookCounter = 0;
+const myLibrary = [
+  {
+  author: "George R.R. Martin",
+  title: "A Game Of Thrones",
+  pages: 694,
+  id: 1,
+  read: "yes",
+},
+  {
+  author: "George R.R. Martin",
+  title: "A Clash Of Kings",
+  pages: 761,
+  id: 2,
+  read: "yes",
+},
+  {
+  author: "George R.R. Martin",
+  title: "A Storm Of Swords",
+  pages: 973,
+  id: 3,
+  read: "yes",
+},
+  {
+  author: "George R.R. Martin",
+  title: "A Feast For Crows",
+  pages: 753,
+  id: 4,
+  read: "yes",
+},
+  {
+  author: "George R.R. Martin",
+  title: "A Dance with Dragons",
+  pages: 1016,
+  id: 5,
+  read: "yes",
+},
+];
+let bookCounter = 6;
 
 function Book(author, title, pages, id, read) {
   this.author = author;
   this.title = title;
   this.pages = pages;
   this.id = id;
-  this.read = read || false;
+  this.read = read === "yes" || "no";
 }
 
 
@@ -98,3 +134,6 @@ newBookBtn.addEventListener("click", toggleModal);
 close.addEventListener("click", closeModal);
 window.addEventListener("click", handleOutsideClick);
 submitBtn.addEventListener("click", handleSubmit);
+
+
+displayBooks(myLibrary)
