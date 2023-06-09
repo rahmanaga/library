@@ -44,12 +44,14 @@ function displayBook(book) {
     <h2>${book.title}</h2>
     <p>By: ${book.author}</p>
     <p>Pages: ${book.pages}</p>
-    <p>Read: ${book.read ? "yes" : "no"}</p>
+    <button type="button" class="readBtn" data-book-id="${book.id}">${book.read === "yes" ? "Read" : "Not Read"}</button>
     <button type="button" class="removeBtn" data-book-id="${book.id}">Remove</button>
   `;
   container.appendChild(newDiv);
   const removeBtn = newDiv.querySelector(".removeBtn");
+  const readBtn = newDiv.querySelector(".readBtn");
   removeBtn.addEventListener("click", handleRemove);
+  readBtn.addEventListener("click", toggleRead);
 }
 
 function displayBooks(library) {
@@ -84,6 +86,13 @@ function handleRemove(event) {
   const bookIndex = myLibrary.findIndex((book) => book.id === bookId)
   myLibrary.splice(bookIndex,1)
   bookElement.remove()
+}
+
+function toggleRead(event) {
+  const bookId = +event.target.getAttribute("data-book-id");
+  const targetBook = myLibrary.find((book) => book.id === bookId);
+  targetBook.read = targetBook.read === "yes" ? "no" : "yes";
+  displayBooks(myLibrary)
 }
 
 newBookBtn.addEventListener("click", toggleModal);
