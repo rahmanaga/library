@@ -10,15 +10,14 @@ const close = document.querySelector(".close");
 const myLibrary = [];
 let bookCounter = 0;
 
-class Book {
-  constructor(author, title, pages,id, read = false) {
-    this.author = author;
-    this.title = title;
-    this.pages = pages;
-    this.id = id;
-    this.read = read;
-  }
+function Book(author, title, pages, id, read) {
+  this.author = author;
+  this.title = title;
+  this.pages = pages;
+  this.id = id;
+  this.read = read || false;
 }
+
 
 function toggleModal() {
   modal.style.display = modal.style.display === "block" ? "none" : "block";
