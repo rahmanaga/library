@@ -79,6 +79,13 @@ h1 {
     border-radius: 10px;
     padding: 1rem;
     transition: all 0.25s ease-in;
+    text-align: center;
+    position: relative;
+}
+
+.card h2 {
+    margin-top: 0.5em;
+    margin-bottom: 1.5em;
 }
 
 .card:hover {
@@ -103,3 +110,12 @@ h1 {
 .newBook:hover {
     background-color: #2E8A99;
   }
+
+.removeBtn {
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    cursor: pointer;
+}
