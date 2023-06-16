@@ -80,8 +80,8 @@ function displayBook(book) {
     <h2>${book.title}</h2>
     <p>By: ${book.author}</p>
     <p>Pages: ${book.pages}</p>
-    <button type="button" class="readBtn" data-book-id="${book.id}">${book.read === "yes" ? "Read" : "Not Read"}</button>
-    <button type="button" class="removeBtn" data-book-id="${book.id}">Remove</button>
+    <p>Status: <button type="button" class="readBtn" data-book-id="${book.id}">${book.read === "yes" ? "Read" : "Not Read"}</button></p>
+    <button type="button" class="removeBtn" data-book-id="${book.id}"><i class="fa-solid fa-trash-can fa-xl" style="color: #1a3d7a;"></i></button>
   `;
   container.appendChild(newDiv);
   const removeBtn = newDiv.querySelector(".removeBtn");
@@ -116,8 +116,8 @@ function handleSubmit(event) {
 }
 
 function handleRemove(event) {
-  const bookId = event.target.getAttribute("data-book-id");
-  const removeBtn = event.target;
+  const bookId = event.target.parentElement.getAttribute("data-book-id");
+  const removeBtn = event.target.parentElement;
   const bookElement = removeBtn.parentElement;
   const bookIndex = myLibrary.findIndex((book) => book.id === bookId)
   myLibrary.splice(bookIndex,1)
