@@ -119,3 +119,28 @@ h1 {
     right: 10px;
     cursor: pointer;
 }
+
+.readBtn {
+    padding: 0.5em 6.4em;
+    color: #fff;
+}
+
+.readBtn.read {
+    background-color: #0079FF;
+    border: 1px solid #30A2FF;
+    border-radius: 3px;
+}
+
+.readBtn.notRead {
+    background-color: #CD1818;
+    border: 1px solid #F24C3D;
+    border-radius: 3px;
+}
+
+.card:has(.read) {
+    background-color: #cee5f0;
+}
+
+.card:has(.notRead) {
+    background-color: #f3c6c6;
+}
