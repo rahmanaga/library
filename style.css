@@ -38,8 +38,29 @@ h1 {
     display: block;
     width: 85%;
     margin: 0.25rem;
-    border-radius: 3px;
+    padding: 0.5em;
+    border-color: #9DB2BF;
+    border-radius: 5px;
     border-style: solid;
+}
+
+.modalContent form select {
+  width: 200px;
+  height: 40px;
+  background-color: #f2f2f2;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  padding: 8px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('./arrow-down.svg');
+  background-position: right center;
+  background-repeat: no-repeat;
+  padding-right: 15px; 
 }
 
 .modalContent form label {
@@ -53,10 +74,26 @@ h1 {
 .submit {
     display: block;
     width: 40%;
-    padding: 0.35rem;
+    height: 40px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 8px 16px;
     margin: 0.5rem auto;
     text-align: center;
     border-style: solid;
+}
+
+.submit:hover {
+    background-color: #0056b3;
+}
+
+.submit:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
 }
 
 .close {
@@ -81,7 +118,27 @@ h1 {
     transition: all 0.25s ease-in;
     text-align: center;
     position: relative;
+    opacity: 1; /* Initial opacity */
 }
+
+.card:hover {
+    background-color: #D8D8D8;
+    opacity: 0.8; /* Reduced opacity on hover */
+}
+
+.card.disappear {
+    opacity: 0; /* Completely hidden when card disappears */
+    height: 0;
+    padding: 0;
+    margin: 0;
+    transition: all 0.25s ease-out; /* Transition for the disappearing effect */
+}
+
+.card.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+  }
 
 .card h2 {
     margin-top: 0.5em;
