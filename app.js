@@ -1,12 +1,12 @@
 const container = document.querySelector(".container");
 const newBookBtn = document.querySelector(".newBook");
-const submitBtn = document.querySelector(".submit");
 const modal = document.querySelector('#forumModal');
 const authorInput = document.querySelector('#authorInput');
 const titleInput = document.querySelector('#titleInput');
 const pagesInput = document.querySelector('#pagesInput');
 const readInput = document.querySelector('#readInput');
 const close = document.querySelector(".close");
+const bookForm = document.querySelector("form");
 const myLibrary = [
   {
   author: "George R.R. Martin",
@@ -148,7 +148,7 @@ function toggleRead(event) {
 newBookBtn.addEventListener("click", toggleModal);
 close.addEventListener("click", closeModal);
 window.addEventListener("click", handleOutsideClick);
-submitBtn.addEventListener("click", handleSubmit);
+bookForm.addEventListener("submit", handleSubmit);
 
 displayBooks(myLibrary);
 // Attaches event listeners, displays the initial library of books
