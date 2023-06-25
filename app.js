@@ -56,20 +56,24 @@ function Book(author, title, pages, id, read) {
 
 function toggleModal() {
   modal.style.display = modal.style.display === "block" ? "none" : "block";
+  // Toggles the display of the modal by changing its style between "block" and "none"
 }
 
 function closeModal() {
   modal.style.display = "none";
+  // Closes the modal by setting its display style to "none"
 }
 
 function handleOutsideClick(event) {
   if (event.target === modal) {
     closeModal();
   }
+  // Closes the modal if the click event occurred outside the modal itself
 }
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
+  // Adds a new book to the myLibrary array
 }
 
 function displayBook(book) {
@@ -90,6 +94,7 @@ function displayBook(book) {
   const readBtn = newDiv.querySelector(".readBtn");
   removeBtn.addEventListener("click", handleRemove);
   readBtn.addEventListener("click", toggleRead);
+  // Displays a book card in the container element and attaches event listeners to the remove and read buttons
 }
 
 function displayBooks(library) {
@@ -97,6 +102,7 @@ function displayBooks(library) {
   library.forEach((book) => {
     displayBook(book);
   });
+  // Clears the container element and displays all the books in the given library
 }
 
 function handleSubmit(event) {
@@ -115,6 +121,7 @@ function handleSubmit(event) {
   bookCounter += 1;
   closeModal();
   displayBooks(myLibrary);
+  // Handles the form submission by creating a new book, adding it to the library, and updating the display
 }
 
 function handleRemove(event) {
@@ -127,6 +134,7 @@ function handleRemove(event) {
   setTimeout(() => {
     bookElement.remove();
   }, 250); // Remove the element after the transition duration (0.25s)
+  // Removes a book from the library and the DOM, triggering a transition effect
 }
 
 function toggleRead(event) {
@@ -134,6 +142,7 @@ function toggleRead(event) {
   const targetBook = myLibrary.find((book) => book.id === bookId);
   targetBook.read = targetBook.read === "yes" ? "no" : "yes";
   displayBooks(myLibrary);
+  // Toggles the read status of a book and updates the display
 }
 
 newBookBtn.addEventListener("click", toggleModal);
@@ -142,3 +151,5 @@ window.addEventListener("click", handleOutsideClick);
 submitBtn.addEventListener("click", handleSubmit);
 
 displayBooks(myLibrary);
+// Attaches event listeners, displays the initial library of books
+
