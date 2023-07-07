@@ -9,40 +9,40 @@ const close = document.querySelector(".close");
 const bookForm = document.querySelector("form");
 const myLibrary = [
   {
-  author: "George R.R. Martin",
-  title: "A Game Of Thrones",
-  pages: 694,
-  id: 1,
-  read: "yes",
-},
+    author: "George R.R. Martin",
+    title: "A Game Of Thrones",
+    pages: 694,
+    id: 1,
+    read: true,
+  },
   {
-  author: "George R.R. Martin",
-  title: "A Clash Of Kings",
-  pages: 761,
-  id: 2,
-  read: "yes",
-},
+    author: "George R.R. Martin",
+    title: "A Clash Of Kings",
+    pages: 761,
+    id: 2,
+    read: true,
+  },
   {
-  author: "George R.R. Martin",
-  title: "A Storm Of Swords",
-  pages: 973,
-  id: 3,
-  read: "yes",
-},
+    author: "George R.R. Martin",
+    title: "A Storm Of Swords",
+    pages: 973,
+    id: 3,
+    read: true,
+  },
   {
-  author: "George R.R. Martin",
-  title: "A Feast For Crows",
-  pages: 753,
-  id: 4,
-  read: "yes",
-},
+    author: "George R.R. Martin",
+    title: "A Feast For Crows",
+    pages: 753,
+    id: 4,
+    read: true,
+  },
   {
-  author: "George R.R. Martin",
-  title: "A Dance with Dragons",
-  pages: 1016,
-  id: 5,
-  read: "yes",
-},
+    author: "George R.R. Martin",
+    title: "A Dance with Dragons",
+    pages: 1016,
+    id: 5,
+    read: true,
+  },
 ];
 let bookCounter = myLibrary.length + 1;
 
@@ -51,50 +51,45 @@ function Book(author, title, pages, id, read) {
   this.title = title;
   this.pages = pages;
   this.id = id;
-  this.read = read === "yes" || "no";
+  this.read = read;
 }
 
 function toggleModal() {
   modal.style.display = modal.style.display === "block" ? "none" : "block";
-  // Toggles the display of the modal by changing its style between "block" and "none"
 }
 
 function closeModal() {
   modal.style.display = "none";
-  // Closes the modal by setting its display style to "none"
 }
 
 function handleOutsideClick(event) {
   if (event.target === modal) {
     closeModal();
   }
-  // Closes the modal if the click event occurred outside the modal itself
 }
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
-  // Adds a new book to the myLibrary array
 }
 
 function displayBook(book) {
   const newDiv = document.createElement("div");
-  newDiv.classList.add("card", "hidden"); // Add the "hidden" class initially
+  newDiv.classList.add("card", "hidden");
   newDiv.innerHTML = `
     <h2>${book.title}</h2>
     <p>By: ${book.author}</p>
     <p>Pages: ${book.pages}</p>
-    <button type="button" class="${book.read === "yes" ? "read" : "notRead"} readBtn" data-book-id="${book.id}">${book.read === "yes" ? "Read" : "Not Read"}</button>
+    <button type="button" class="${book.read ? "read" : "notRead"} readBtn" data-book-id="${book.id}">${book.read ? "Read" : "Not Read"}</button>
     <button type="button" class="removeBtn" data-book-id="${book.id}"><i class="fa-solid fa-trash-can fa-xl" style="color: #1a3d7a;"></i></button>
   `;
   container.appendChild(newDiv);
   setTimeout(() => {
-    newDiv.classList.remove("hidden"); // Remove the "hidden" class to trigger the transition
-  }, 10); // Delay the removal of "hidden" class to ensure transition effect
+    newDiv.classList.remove("hidden");
+  }, 10);
   const removeBtn = newDiv.querySelector(".removeBtn");
   const readBtn = newDiv.querySelector(".readBtn");
   removeBtn.addEventListener("click", handleRemove);
   readBtn.addEventListener("click", toggleRead);
-  // Displays a book card in the container element and attaches event listeners to the remove and read buttons
 }
 
 function displayBooks(library) {
@@ -102,7 +97,6 @@ function displayBooks(library) {
   library.forEach((book) => {
     displayBook(book);
   });
-  // Clears the container element and displays all the books in the given library
 }
 
 function handleSubmit(event) {
@@ -112,7 +106,7 @@ function handleSubmit(event) {
     titleInput.value,
     pagesInput.value,
     bookCounter,
-    readInput.value
+    readInput.checked
   );
   addBookToLibrary(newBook);
   authorInput.value = "";
@@ -121,7 +115,6 @@ function handleSubmit(event) {
   bookCounter += 1;
   closeModal();
   displayBooks(myLibrary);
-  // Handles the form submission by creating a new book, adding it to the library, and updating the display
 }
 
 function handleRemove(event) {
@@ -130,19 +123,17 @@ function handleRemove(event) {
   const bookElement = removeBtn.parentElement;
   const bookIndex = myLibrary.findIndex((book) => book.id === parseInt(bookId));
   myLibrary.splice(bookIndex, 1);
-  bookElement.classList.add("disappear"); // Apply class to trigger transition
+  bookElement.classList.add("disappear");
   setTimeout(() => {
     bookElement.remove();
-  }, 250); // Remove the element after the transition duration (0.25s)
-  // Removes a book from the library and the DOM, triggering a transition effect
+  }, 250);
 }
 
 function toggleRead(event) {
   const bookId = +event.target.getAttribute("data-book-id");
   const targetBook = myLibrary.find((book) => book.id === bookId);
-  targetBook.read = targetBook.read === "yes" ? "no" : "yes";
+  targetBook.read = !targetBook.read;
   displayBooks(myLibrary);
-  // Toggles the read status of a book and updates the display
 }
 
 newBookBtn.addEventListener("click", toggleModal);
@@ -151,5 +142,3 @@ window.addEventListener("click", handleOutsideClick);
 bookForm.addEventListener("submit", handleSubmit);
 
 displayBooks(myLibrary);
-// Attaches event listeners, displays the initial library of books
-
